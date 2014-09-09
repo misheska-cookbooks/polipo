@@ -12,17 +12,16 @@ when 'rhel'
   package polipo_rpm do
     source polipo_local_rpm_path
     provider Chef::Provider::Package::Rpm
-  end 
+  end
 when 'debian'
   include_recipe 'apt'
   package 'polipo'
 end
 
-#service 'polipo'
 service 'polipo' do
   init_command '/etc/init.d/polipo'
-  supports :restart => true, :reload => true, :status => true
-  action [ :enable, :start ]
+  supports restart: true, reload: true, status: true
+  action [:enable, :start]
 end
 
 template '/etc/polipo/config' do
