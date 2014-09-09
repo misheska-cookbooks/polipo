@@ -5,7 +5,7 @@
 Install [Polipo](http://www.pps.univ-paris-diderot.fr/~jch/software/polipo/)
 caching web proxy.
 
-Using the default configuration, you can access the web interface on port 812 via 
+Using the default configuration, you can access the web interface on port 8123 via 
 http://192.168.33.34:8123
 
 ![web interface](https://github.com/misheska-cookbooks/polipo/raw/master/img/web_interface.png)
