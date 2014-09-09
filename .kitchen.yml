@@ -1,0 +1,40 @@
+<%
+vagrant_provider = ENV['VAGRANT_PROVIDER'] ? ENV['VAGRANT_PROVIDER'] : 'virtualbox'
+ip_address = ENV['VAGRANT_IP_ADDRESS'] ? ENV['VAGRANT_IP_ADDRESS'] : '192.168.33.34'
+%>
+---
+driver:
+  name: vagrant
+  ip_address: &ip_address <%= ip_address %>
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu1404
+    driver:
+      provider: <%= vagrant_provider %>
+      box: box-cutter/ubuntu1404
+      box_url: box-cutter/ubuntu1404
+      network:
+      - ["private_network", {ip: *ip_address}]
+      customize:
+        cpus: 2
+        memory: 1024
+
+  - name: centos70
+    driver:
+      provider: <%= vagrant_provider %>
+      box: box-cutter/centos70
+      box_url: box-cutter/centos70
+      network:
+      - ["private_network", {ip: *ip_address}]
+      customize:
+        cpus: 2
+        memory: 1024
+
+suites:
+  - name: default
+    run_list:
+      - recipe[polipo::default]
+    attributes:
